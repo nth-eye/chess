@@ -1,0 +1,29 @@
+<RCC>
+    <qresource prefix="/">
+        <file>main.qml</file>
+        <file>ChatWindow.qml</file>
+        <file>ColorSlider.qml</file>
+        <file>GamePage.qml</file>
+        <file>GamePageForm.ui.qml</file>
+        <file>MyButton.qml</file>
+        <file>OnlineWindow.qml</file>
+        <file>SettingsPageForm.qml</file>
+        <file>StartWindow.qml</file>
+        <file>qtquickcontrols2.conf</file>
+        <file>images/white_bishop.png</file>
+        <file>images/black_bishop.png</file>
+        <file>images/board.png</file>
+        <file>images/white_king.png</file>
+        <file>images/black_king.png</file>
+        <file>images/white_knight.png</file>
+        <file>images/black_knight.png</file>
+        <file>images/white_pawn.png</file>
+        <file>images/black_pawn.png</file>
+        <file>images/white_queen.png</file>
+        <file>images/black_queen.png</file>
+        <file>images/white_rook.png</file>
+        <file>images/black_rook.png</file>
+        <file>Clock.qml</file>
+        <file>DrawWindow.qml</file>
+    </qresource>
+</RCC>
