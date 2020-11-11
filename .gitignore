@@ -1,0 +1,6 @@
+Client/.vscode
+Client/build
+Client/CMakeLists.txt.user
+Server/.vscode
+Server/build
+Server/CMakeLists.txt.user
