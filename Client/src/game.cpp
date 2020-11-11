@@ -356,10 +356,10 @@ void Game::graphicMove(Move m)
 	}
 	
 	int fromY = 7 - (f / 8);
-	int fromX = f % 8;
+	int fromX = f & 7;
 	
 	int toY = 7 - (t / 8);
-	int toX = t % 8;
+	int toX = t & 7;
 	
     if (flags == Move::KCASTLE || flags == Move::QCASTLE) {
 		int rookX = fromX > toX ? 0 : 7;
