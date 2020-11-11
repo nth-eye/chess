@@ -11,7 +11,9 @@ set(CMAKE_AUTORCC ON)
 set(CMAKE_CXX_STANDARD 20)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
 
-include_directories(. QML src engine)
+set(ENGINE_DIR ~/github/ChessEngine-cpp/)
+
+include_directories(. qml include ${ENGINE_DIR}/include)
 
 set(SOURCES
     src/main.cpp
@@ -21,8 +23,8 @@ set(SOURCES
     src/piece.cpp
     src/player.cpp
     src/spot.cpp
-    engine/engine.cpp
-    engine/board.cpp
+    #ENGINE_DIR/src/engine.cpp
+    #ENGINE_DIR/src/board.cpp
 )
 
 # QtCreator supports the following variables for Android, which are identical to qmake Android variables.
@@ -50,8 +52,8 @@ if(ANDROID)
         src/piece.cpp
         src/player.cpp
         src/spot.cpp
-        engine/engine.cpp
-        engine/board.cpp
+        # ENGINE_DIR/src/engine.cpp
+        # ENGINE_DIR/src/board.cpp
         qml.qrc
     )
 else()
@@ -63,8 +65,8 @@ else()
         src/piece.cpp
         src/player.cpp
         src/spot.cpp
-        engine/engine.cpp
-        engine/board.cpp
+        # ENGINE_DIR/src/engine.cpp
+        # ENGINE_DIR/src/board.cpp
         qml.qrc
     )
 endif()

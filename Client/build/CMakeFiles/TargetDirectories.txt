@@ -1,0 +1,4 @@
+/home/ntheye/github/Chess-qml/Client/build/CMakeFiles/rebuild_cache.dir
+/home/ntheye/github/Chess-qml/Client/build/CMakeFiles/edit_cache.dir
+/home/ntheye/github/Chess-qml/Client/build/CMakeFiles/Chess.dir
+/home/ntheye/github/Chess-qml/Client/build/CMakeFiles/Chess_autogen.dir

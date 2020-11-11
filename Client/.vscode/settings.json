@@ -1,0 +1,7 @@
+{
+    "files.associations": {
+        "qapplication": "cpp",
+        "qqmlengine": "cpp",
+        "qqmlapplicationengine": "cpp"
+    }
+}

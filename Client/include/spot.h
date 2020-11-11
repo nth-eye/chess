@@ -5,9 +5,9 @@
 #include "piece.h"
 
 class Spot : public QQuickItem {
-	Q_OBJECT
+    Q_OBJECT
 public:
-	Spot(int sq, QQuickItem *parent = nullptr);
+    Spot(int sq, QQuickItem *parent = nullptr);
 protected:
     QSGNode *updatePaintNode(QSGNode *oldNode, UpdatePaintNodeData *data) override;
 };

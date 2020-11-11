@@ -10,23 +10,23 @@ class Game;
 
 class Player {
 public:
-	Player() {}
-	virtual ~Player() = default;
-	
+    Player() {}
+    virtual ~Player() = default;
+    
     int getColor() const { return color; }
     void setColor(int color_) { color = color_; }
     virtual void passTurn() { return; }
-	
-	static Game *game;
+    
+    static Game *game;
 protected:
-	int color;
+    int color;
 };
 
 
 class OfflinePlayer : public Player {
 public:
-	OfflinePlayer() {}
-	
+    OfflinePlayer() {}
+    
     virtual void passTurn() override;
 };
 
@@ -34,10 +34,10 @@ public:
 class AIPlayer : public Player{
 public:
     AIPlayer(QFutureWatcher<chess::Move> *watcher_ = nullptr,
-             QEventLoop *loop_ = nullptr)
+            QEventLoop *loop_ = nullptr)
         : watcher(watcher_), loop(loop_)
     {}
-	
+    
     virtual void passTurn() override;
 private:
     QFutureWatcher<chess::Move> *watcher;
@@ -47,8 +47,8 @@ private:
 
 class OnlinePlayer : public Player {
 public:
-	OnlinePlayer() {}
-	
+    OnlinePlayer() {}
+    
     virtual void passTurn() override;
 };
 

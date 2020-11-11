@@ -11,11 +11,11 @@
 const int SQ_SIZE = 60;
 
 class Piece : public QQuickItem {
-	Q_OBJECT
+    Q_OBJECT
 public:
     Piece(int y, int x, int t, int c, QQuickItem *parent = nullptr);
-	
-	int type;
+    
+    int type;
     int color;
 protected:
     QSGNode *updatePaintNode(QSGNode *oldNode, UpdatePaintNodeData *data) override;
@@ -25,8 +25,8 @@ protected:
 struct Cmp {
     bool operator()(const Piece *lhs, const Piece *rhs) const
     {
-		return lhs->type < rhs->type; 
-	} 
+        return lhs->type < rhs->type; 
+    } 
 };
 
 #endif // PIECE_H
