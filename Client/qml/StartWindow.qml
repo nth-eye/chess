@@ -3,7 +3,8 @@ import QtQuick.Controls 2.5
 import QtQuick.Controls.Universal 2.3
 import QtQuick.Layouts 1.3
 
-Rectangle {
+Rectangle
+{
     property alias humanButton: humanButton
     property alias aiButton: aiButton
     property alias whiteButton: whiteButton
@@ -19,7 +20,9 @@ Rectangle {
     color: Universal.theme === Universal.Dark ? "#f0222222" : "#f0dddddd"
     anchors.horizontalCenter: parent.horizontalCenter
     anchors.verticalCenter: parent.verticalCenter
-    RowLayout {
+
+    RowLayout
+    {
         y: 56
         anchors.right: parent.right
         anchors.rightMargin: 16
@@ -28,73 +31,93 @@ Rectangle {
         anchors.verticalCenterOffset: -14
         anchors.verticalCenter: parent.verticalCenter
         spacing: 12
-        ColumnLayout {
+
+        ColumnLayout
+        {
             spacing: 6
-            RadioButton {
+
+            RadioButton
+            {
                 id: humanButton
                 text: qsTr("Human")
                 checked: true
                 checkable: !onlineWindow.visible
                 down: onlineWindow.visible
             }
-            RadioButton {
+            RadioButton
+            {
                 id: aiButton
                 text: qsTr("AI")
                 checkable: !onlineWindow.visible
                 down: onlineWindow.visible
             }
         } 
-        ColumnLayout {
+        ColumnLayout
+        {
             spacing: 6
-            RadioButton {
+
+            RadioButton
+            {
                 id: whiteButton
                 text: qsTr("White")
                 checked: true
                 checkable: aiButton.checked || onlineWindow.visible
                 down: humanButton.checked && !onlineWindow.visible
             }
-            RadioButton {
+            RadioButton
+            {
                 id: blackButton
                 text: qsTr("Black")
                 checkable: aiButton.checked || onlineWindow.visible
                 down: humanButton.checked && !onlineWindow.visible
             }
         }
-        ColumnLayout {
+        ColumnLayout
+        {
             spacing: 6
-            SpinBox {
+
+            SpinBox
+            {
                 id: minBox
                 editable: true
                 to: 59
                 value: 5
             }
-            SpinBox {
+            SpinBox
+            {
                 id: secBox
                 editable: true
                 to: 59
             }
         }
-        ColumnLayout {
+        ColumnLayout
+        {
             Layout.preferredHeight: 70
             Layout.preferredWidth: 56
             spacing: 6
-            Label {
+
+            Label
+            {
                 id: minLabel
                 text: qsTr("Minutes")
             }
-            Label {
+            Label
+            {
                 id: secLabel
                 text: qsTr("Seconds")
             }
         }
     }
     
-    RowLayout {
+    RowLayout
+    {
         spacing: 1
         anchors.right: parent.right
         anchors.left: parent.left
         anchors.bottom: parent.bottom
-        MyButton {
+
+        MyButton
+        {
             id: startButton
             width: 90
             text: onlineWindow.visible ? qsTr("Create") : qsTr("Start")
@@ -103,7 +126,8 @@ Rectangle {
             Layout.fillHeight: true
             Layout.fillWidth: true
         }
-        MyButton {
+        MyButton
+        {
             id: cancelButton
             width: 90
             text: qsTr("Cancel")

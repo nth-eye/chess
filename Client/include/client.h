@@ -3,7 +3,6 @@
 
 #include <QTcpSocket>
 #include <QTcpServer>
-#include <QDataStream>
 #include "model.h"
 
 class Client : public QTcpServer {

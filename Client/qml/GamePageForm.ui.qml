@@ -3,7 +3,8 @@ import QtQuick.Controls 2.5
 import QtQuick.Controls.Universal 2.3
 import QtQuick.Layouts 1.3
 
-Page {
+Page
+{
     property alias gameStatus: gameStatus
     property alias whiteClock: whiteClock
     property alias blackClock: blackClock
@@ -27,7 +28,8 @@ Page {
     width: 1240
     height: 720
 
-    header: Label {
+    header: Label
+    {
         text: "Chess"
         color: Universal.accent
         font.pixelSize: 36
@@ -35,7 +37,8 @@ Page {
         padding: 10
     }
     
-    ColumnLayout {
+    ColumnLayout
+    {
         id: mainButtons
         width: 240
         height: 120
@@ -43,7 +46,9 @@ Page {
         visible: !boardWindow.visible
         enabled: !startWindow.visible && !onlineWindow.visible
         spacing: 20
-        MyButton {
+
+        MyButton
+        {
             id: onlineButton
             text: qsTr("Online")
             textColor: Universal.accent
@@ -51,7 +56,8 @@ Page {
             Layout.fillWidth: true
             Layout.fillHeight: true
         }
-        MyButton {
+        MyButton
+        {
             id: offlineButton
             text: qsTr("Offline")
             textColor: Universal.accent
@@ -61,7 +67,8 @@ Page {
         }
     }
     
-    Rectangle {
+    Rectangle
+    {
         id: boardWindow
         width: 498
         height: 498
@@ -71,7 +78,9 @@ Page {
         anchors.verticalCenter: parent.verticalCenter
         anchors.horizontalCenter: parent.horizontalCenter
         visible: false
-        Clock {
+
+        Clock
+        {
             id: whiteClock
             anchors.bottom: parent.top
             anchors.left: parent.left
@@ -79,7 +88,8 @@ Page {
             visible: false
             state: "RUNNING"
         }
-        Clock {
+        Clock
+        {
             id: blackClock
             anchors.bottom: parent.top
             anchors.right: parent.right
@@ -87,7 +97,8 @@ Page {
             visible: false
             state: "STOPPED"
         }
-        Label {
+        Label
+        {
             id: gameStatus
             text: qsTr("Welcome!")
             font.pixelSize: 20
@@ -96,7 +107,8 @@ Page {
             anchors.horizontalCenter: parent.horizontalCenter
             horizontalAlignment: Text.AlignHCenter
         }
-        Image {
+        Image
+        {
             id: boardImg
             source: "/images/board.png"
             width: 480
@@ -105,19 +117,23 @@ Page {
             anchors.horizontalCenter: parent.horizontalCenter
             objectName: "boardImg"
         }
-        Rectangle {
+        Rectangle
+        {
             id: promotionWindow
             color: Universal.theme === Universal.Dark ? "#f0222222" : "#f0dddddd"
             width: 360
             height: 120
             anchors.centerIn: parent
             visible: false
-            RowLayout {
+
+            RowLayout
+            {
                 anchors.centerIn: parent
                 height: 60
                 width: 300
                 spacing: 20
-                Button {
+                Button
+                {
                     id: queenButton
                     icon.source: "/images/queen.png"
                     icon.width: parent.width
@@ -125,7 +141,8 @@ Page {
                     Layout.fillHeight: true
                     Layout.fillWidth: true
                 }
-                Button {
+                Button
+                {
                     id: rookButton
                     icon.source: "/images/rook.png"
                     icon.width: parent.width
@@ -133,7 +150,8 @@ Page {
                     Layout.fillHeight: true
                     Layout.fillWidth: true
                 }
-                Button {
+                Button
+                {
                     id: bishopButton
                     icon.source: "/images/bishop.png"
                     icon.width: parent.width
@@ -141,7 +159,8 @@ Page {
                     Layout.fillHeight: true
                     Layout.fillWidth: true
                 }
-                Button {
+                Button
+                {
                     id: knightButton
                     icon.source: "/images/knight.png"
                     icon.width: parent.width
@@ -153,22 +172,26 @@ Page {
         }
     }
     
-    ChatWindow {
+    ChatWindow
+    {
         id: chatWindow
         visible: boardWindow.visible
     }
     
-    OnlineWindow {
+    OnlineWindow
+    {
         id: onlineWindow
         visible: false
     }
     
-    StartWindow {
+    StartWindow
+    {
         id: startWindow
         visible: false
     }
     
-    DrawWindow {
+    DrawWindow
+    {
         id: drawWindow
         visible: false
     }

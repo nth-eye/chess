@@ -22,8 +22,8 @@
         <file>qml/main.qml</file>
         <file>qml/MyButton.qml</file>
         <file>qml/OnlineWindow.qml</file>
-        <file>qml/qtquickcontrols2.conf</file>
-        <file>qml/SettingsPageForm.qml</file>
+        <file>qml/SettingsPage.qml</file>
         <file>qml/StartWindow.qml</file>
+        <file>qtquickcontrols2.conf</file>
     </qresource>
 </RCC>

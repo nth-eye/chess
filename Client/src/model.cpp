@@ -1,3 +1,7 @@
+#include <QHostAddress>
+#include <QDataStream>
+#include <QTime>
+
 #include "model.h"
 
 Model::Model(QObject *parent) : QAbstractListModel(parent) {}
@@ -23,10 +27,9 @@ QVariant Model::data(const QModelIndex &index, int role) const
         case IpRole:	return QVariant(QHostAddress(item.ip).toString());
         case PortRole:	return QVariant(QString::number(item.port));
         case ColorRole:	return QVariant(item.colorAndTime & 0x8000 ? "black" : "white");
-        case TimeRole:	return QVariant(item.colorAndTime & 0x0FFF ? (
-                                        QString::number((item.colorAndTime & 0x0FFF) / 60).rightJustified(2, '0')+':'+
-                                        QString::number((item.colorAndTime & 0x0FFF) % 60).rightJustified(2, '0')) : "No limit");
-        // FIXME QDateTime::fromTime_t(item.time).toString("mm:ss"));
+        case TimeRole:	return QVariant(item.colorAndTime & 0x0FFF ?
+                                        QDateTime::fromTime_t(item.colorAndTime & 0x0FFF ).toString("mm:ss") :
+                                        "No limit");
     }
 
     return QVariant();

@@ -1,3 +1,5 @@
+#include <QQuickWindow>
+
 #include "spot.h"
 
 Spot::Spot(int sq, QQuickItem *parent) : QQuickItem(parent)

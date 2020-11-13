@@ -1,3 +1,5 @@
+#include <QDataStream>
+
 #include "client.h"
 
 Client::Client(QObject *parent) 
@@ -14,7 +16,7 @@ Client::Client(QObject *parent)
     connect(serverSocket, &QAbstractSocket::disconnected, this, &Client::disconnectedFromServer);
     connect(serverSocket, &QAbstractSocket::disconnected, [this]() {close();});
     connect(serverSocket, &QAbstractSocket::readyRead, this, &Client::handleServerReply);
-    connect(serverSocket, QOverload<QAbstractSocket::SocketError>::of(&QAbstractSocket::error), 
+    connect(serverSocket, QOverload<QAbstractSocket::SocketError>::of(&QAbstractSocket::errorOccurred),
         [this]() {emit serverError(serverSocket->errorString());}
     );
     
@@ -22,7 +24,7 @@ Client::Client(QObject *parent)
     connect(playerSocket, &QAbstractSocket::connected, this, &Client::connectedToPlayer);
     connect(playerSocket, &QAbstractSocket::disconnected, this, &Client::disconnectedFromPlayer);
     connect(playerSocket, &QAbstractSocket::readyRead, this, &Client::handlePlayerReply);
-    connect(playerSocket, QOverload<QAbstractSocket::SocketError>::of(&QAbstractSocket::error), 
+    connect(playerSocket, QOverload<QAbstractSocket::SocketError>::of(&QAbstractSocket::errorOccurred),
         [this]() {emit playerError(playerSocket->errorString());}
     );
 }
@@ -109,26 +111,26 @@ void Client::handlePlayerReply()
     out.setByteOrder(QDataStream::BigEndian);
     
     switch (request) {
-        case 0x01:	//new chat message
+        case 0x01:	// new chat message
             emit updateDialogue(QString(block));
             break;
-        case 0x02:	//make move
+        case 0x02:	// make move
             out >> move;
             out >> ms;
             emit updateGame(0x02, move, ms);
             break;
-        case 0x04:	//resigned
+        case 0x04:	// resigned
             emit updateGame(0x04, 0, 0);
             emit importantMsg("OPPONENT RESIGNED - YOU WON");
             break;
-        case 0x08:	//claims draw
+        case 0x08:	// claims draw
             emit updateGame(0x08, 0, 0);
             emit importantMsg("OPPONENT CHOSE A DRAW");
             break;
-        case 0x0f:	//offers draw
+        case 0x0f:	// offers draw
             emit drawOffer();
             break;
-        case 0x10:	//confirm game end
+        case 0x10:	// confirm game end
             emit updateGame(0x10, 0, 0);
             break;
     }

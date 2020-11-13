@@ -2,8 +2,6 @@
 #define MODEL_H
 
 #include <QAbstractListModel>
-#include <QHostAddress>
-#include <QDataStream>
 
 struct GameItem {
     uint8_t ip[16];			// up to IPv6 128 bits, IPv4 will be mapped to IPv6

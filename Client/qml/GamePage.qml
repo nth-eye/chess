@@ -3,27 +3,33 @@ import QtQuick.Controls.Universal 2.3
 import chess.game 1.0
 import chess.client 1.0
 
-GamePageForm {
+GamePageForm
+{
     property int gameType;
     property string str;
     property int time: startWindow.minBox.value*60 + startWindow.secBox.value
     
-    onlineButton.onClicked: {
+    onlineButton.onClicked:
+    {
         gameType = Game.ONLINE
         onlineWindow.visible = true
     }
-    offlineButton.onClicked: {
+    offlineButton.onClicked:
+    {
         gameType = Game.OFFLINE
         startWindow.visible = true
     }
     
-    onlineWindow.closeButton.onClicked: {
+    onlineWindow.closeButton.onClicked:
+    {
         onlineWindow.visible = false
     }
-    onlineWindow.acceptButton.onClicked: {
+    onlineWindow.acceptButton.onClicked:
+    {
         Client.connectToGame(onlineWindow.gameList.currentIndex);
     }
-    onlineWindow.createButton.onClicked: {
+    onlineWindow.createButton.onClicked:
+    {
         if (onlineWindow.createButton.down) {
             onlineWindow.visible = true
             onlineWindow.state = "CONNECTED"
@@ -35,7 +41,8 @@ GamePageForm {
             startWindow.humanButton.checked = true
         }
     }
-    onlineWindow.serverButton.onClicked: {
+    onlineWindow.serverButton.onClicked:
+    {
         if (onlineWindow.serverButton.down) {
             onlineWindow.state = "DISCONNECTED"
             Client.disconnectFromServer();
@@ -44,20 +51,24 @@ GamePageForm {
             Client.connectToServer(onlineWindow.serverField.text);
         }
     }
-    onlineWindow.refreshButton.onClicked: {
+    onlineWindow.refreshButton.onClicked:
+    {
         Client.updateGames();
     }
     
     
-    startWindow.humanButton.onClicked: {
+    startWindow.humanButton.onClicked:
+    {
         startWindow.whiteButton.checked = true
     }
-    startWindow.cancelButton.onClicked: {
+    startWindow.cancelButton.onClicked:
+    {
         if (onlineWindow.visible) 
             onlineWindow.enabled = true
         startWindow.visible = false
     }
-    startWindow.startButton.onClicked: {
+    startWindow.startButton.onClicked:
+    {
         startWindow.visible = false
         chatWindow.finishButton.visible = false
         if (onlineWindow.visible) {
@@ -79,7 +90,8 @@ GamePageForm {
         }
     }
     
-    chatWindow.finishButton.onClicked: {
+    chatWindow.finishButton.onClicked:
+    {
         if (gameType === Game.ONLINE) {
             if (chatWindow.disconnectButton.enabled)
                 Client.disconnectFromGame();
@@ -91,16 +103,19 @@ GamePageForm {
         whiteClock.visible = false
         blackClock.visible = false
     }
-    chatWindow.claimDrawButton.onClicked: {
+    chatWindow.claimDrawButton.onClicked:
+    {
         Game.claimDraw();
         Client.sendAction("\x08");
     }
-    chatWindow.offerDrawButton.onClicked: {
+    chatWindow.offerDrawButton.onClicked:
+    {
        Client.sendAction("\x0f");
        chatWindow.offerDrawButton.enabled = false
        chatWindow.drawTimer.start();
     }
-    chatWindow.resignButton.onClicked: {
+    chatWindow.resignButton.onClicked:
+    {
         if (gameType === Game.ONLINE) {
             Client.sendAction("\x04");
             chatWindow.dialogueText.append("<i><font color=\"#ee1111\">YOU RESIGNED - OPPONENT WON</font></i>");
@@ -109,59 +124,71 @@ GamePageForm {
         Game.statusChanged(Game.RESIGN, Game.getSide());
         Game.endGame();
     }
-    chatWindow.drawTimer.onTriggered: {
+    chatWindow.drawTimer.onTriggered:
+    {
         chatWindow.offerDrawButton.enabled = true
     }
-    chatWindow.disconnectButton.onClicked: {
+    chatWindow.disconnectButton.onClicked:
+    {
         Client.disconnectFromGame();
     }
-    chatWindow.messageField.onEditingFinished: {
+    chatWindow.messageField.onEditingFinished:
+    {
         if (chatWindow.messageField.text.length)
             chatWindow.sendButton.clicked();
     }
-    chatWindow.sendButton.onClicked: {
+    chatWindow.sendButton.onClicked:
+    {
         Client.sendMessage(chatWindow.messageField.text);
         chatWindow.dialogueText.append("<font color=\"#888888\">You: "+chatWindow.messageField.text+"</font>");
         chatWindow.messageField.clear();
     }
     
-    drawWindow.drawYesButton.onClicked: {
+    drawWindow.drawYesButton.onClicked:
+    {
         drawWindow.visible = false
         boardWindow.enabled = true
         chatWindow.enabled = true
         Client.sendAction("\x08");
         Game.claimDraw();
     }
-    drawWindow.drawNoButton.onClicked: {
+    drawWindow.drawNoButton.onClicked:
+    {
         drawWindow.visible = false
         boardWindow.enabled = true
         chatWindow.enabled = true
     }
     
-    queenButton.onClicked: {
+    queenButton.onClicked:
+    {
         promotionWindow.visible = false
         Game.enabled = true;
         Game.promote(45056);
     }
-    rookButton.onClicked: {
+    rookButton.onClicked:
+    {
         promotionWindow.visible = false
         Game.enabled = true;
         Game.promote(40960);
     }
-    bishopButton.onClicked: {
+    bishopButton.onClicked:
+    {
         promotionWindow.visible = false
         Game.enabled = true;
         Game.promote(36864);
     }
-    knightButton.onClicked: {
+    knightButton.onClicked:
+    {
         promotionWindow.visible = false
         Game.enabled = true;
         Game.promote(32768);
     }
     
-    Connections {
+    Connections
+    {
         target: Game
-        onStatusChanged: {
+        onStatusChanged:
+        {
             str = turn ? "Black" : "White";
             switch (status) {
                 case Game.REGULAR:   gameStatus.text = qsTr(str+"'s turn"); break;
@@ -179,34 +206,42 @@ GamePageForm {
                 blackClock.state = "STOPPED"
             }
         }
-        onTimeChanged: {
+        onTimeChanged:
+        {
             if (turn)
                 blackClock.clockTime.text = Qt.formatTime(time, "mm:ss:z")
             else
                 whiteClock.clockTime.text = Qt.formatTime(time, "mm:ss:z")
         }
-        onDrawAvailable: {
+        onDrawAvailable:
+        {
             chatWindow.claimDrawButton.enabled = draw;
         }
-        onGameEnded: {
+        onGameEnded:
+        {
             chatWindow.finishButton.visible = true;
         }
-        onGetPromotion: {
+        onGetPromotion:
+        {
             promotionWindow.visible = true
         }
     }
     
-    Connections {
+    Connections
+    {
         target: Client
-        onConnectedToServer: {
+        onConnectedToServer:
+        {
             onlineWindow.state = "CONNECTED"
             Client.updateGames();
         }
-        onDisconnectedFromServer: {
+        onDisconnectedFromServer:
+        {
             onlineWindow.state = "DISCONNECTED"
         }
         
-        onConnectedToPlayer: {
+        onConnectedToPlayer:
+        {
             onlineWindow.state = "CONNECTED"
             onlineWindow.visible = false
             
@@ -223,7 +258,8 @@ GamePageForm {
             }
             Game.startGame(gameType, Client.getSide(), Client.getTime());
         }
-        onDisconnectedFromPlayer: {     
+        onDisconnectedFromPlayer:
+        {
             chatWindow.ipField.clear();
             chatWindow.disconnectButton.enabled = false
             chatWindow.offerDrawButton.enabled = false
@@ -233,24 +269,29 @@ GamePageForm {
             Game.endGame();
         }
         
-        onUpdateDialogue: {
+        onUpdateDialogue:
+        {
             chatWindow.dialogueText.append("Opponent: "+message);
         }
-        onImportantMsg: {
+        onImportantMsg:
+        {
             chatWindow.dialogueText.append("<i><font color=\"#ee1111\">"+message+"</font></i>");
         }
-        onDrawOffer: {
+        onDrawOffer:
+        {
             drawWindow.visible = true
             boardWindow.enabled = false
             chatWindow.enabled = false
         }
         
-        onServerError: {
+        onServerError:
+        {
             Client.disconnectFromServer();
             onlineWindow.state = "DISCONNECTED"
             onlineWindow.onlineLabel.text = "Error: "+errorString
         }
-        onPlayerError: {
+        onPlayerError:
+        {
             console.log("Player error: "+errorString);
         }
     }

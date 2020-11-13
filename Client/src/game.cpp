@@ -348,7 +348,7 @@ void Game::graphicMove(Move m)
 {
     int f = m.from();
     int t = m.to();
-    int flags = m.flags();
+    uint16_t flags = m.flags();
 	
 	if (rotated) {
 		f = 63 - f;
@@ -371,7 +371,7 @@ void Game::graphicMove(Move m)
 	}
 	
     if (flags & Move::N_PROM) {
-        pieces[fromY][fromX]->type = flags;
+        pieces[fromY][fromX]->type = promotion_to_type.at(flags);
 		pieces[fromY][fromX]->update();
 	}
 
@@ -394,13 +394,13 @@ void Game::graphicMove(Move m)
             if (it == trg)
                 idx = i;
             else {
-                it->setY(i%8 * SQ_SIZE);
-                it->setX(540 + 120*c + i/8*SQ_SIZE);
+                it->setY((i & 7) * SQ_SIZE);
+                it->setX(540 + 120*c + i / 8 *SQ_SIZE);
             }
 			++i;
 		}
 		trg->setOpacity(0.5);
-        animate(trg, y, x, idx%8, 9 + 2*c + idx/8);
+        animate(trg, y, x, idx & 7, 9 + 2 * c + idx / 8);
 	}
 	
 	pieces[toY][toX] = pieces[fromY][fromX];

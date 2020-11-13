@@ -5,7 +5,8 @@ import QtQuick.Layouts 1.3
 import chess.game 1.0
 import chess.client 1.0
 
-ColumnLayout {
+ColumnLayout
+{
     property alias serverField: serverField
     property alias serverButton: serverButton
     property alias refreshButton: refreshButton
@@ -22,12 +23,16 @@ ColumnLayout {
     spacing: 0
     visible: true
     anchors.centerIn: parent 
-    RowLayout {
+
+    RowLayout
+    {
         Layout.preferredHeight: 30
         Layout.fillHeight: false
         Layout.fillWidth: true
         spacing: 8
-        TextField {
+
+        TextField
+        {
             id: serverField
             text: qsTr("127.0.0.1")
             placeholderText: qsTr("Server IP address")
@@ -38,7 +43,8 @@ ColumnLayout {
             selectByMouse: true
             enabled: !serverButton.down
         }
-        MyButton {
+        MyButton
+        {
             id: serverButton
             text: down ? qsTr("Disconnect from server") : qsTr("Connect to server")
             Layout.fillHeight: true
@@ -47,7 +53,8 @@ ColumnLayout {
             textColor: down ? "#ee1111" : Universal.accent
             down: false
         }
-        MyButton {
+        MyButton
+        {
             id: refreshButton
             text: qsTr("Refresh")
             Layout.fillHeight: true
@@ -56,44 +63,54 @@ ColumnLayout {
             enabled: onlineWindow.state === "CONNECTED"
         }
     }
-    Rectangle {
+    Rectangle
+    {
         color: Universal.theme === Universal.Dark ? "#f0666666" : "#f0999999"
         Layout.fillHeight: false
         Layout.fillWidth: true
         Layout.preferredHeight: 24
-        RowLayout {
+
+        RowLayout
+        {
             anchors.rightMargin: 8
             anchors.leftMargin: 8
             anchors.fill: parent
             spacing: 20    
-            Label {
+            Label
+            {
                 id: ipColumn
                 text: "IP address"
                 Layout.fillWidth: true
             }
-            Label {
+            Label
+            {
                 id: portColumn
                 text: "Port"
                 Layout.fillWidth: true
             }
-            Label {
+            Label
+            {
                 id: sideColumn
                 text: "Your side"
                 Layout.fillWidth: true
             }
-            Label {
+            Label
+            {
                 id: timeColumn
                 text: "Time limit"
                 Layout.fillWidth: true
             }
         }
     }
-    Rectangle {
+    Rectangle
+    {
         id: rectangle
         color: Universal.theme === Universal.Dark ? "#f0222222" : "#f0dddddd"
         Layout.fillHeight: true
         Layout.fillWidth: true
-        Label {
+
+        Label
+        {
             id: onlineLabel
             text: "Disconnected from server"
             horizontalAlignment: Text.AlignHCenter
@@ -101,7 +118,8 @@ ColumnLayout {
             anchors.fill: parent
             visible: true
         }
-        BusyIndicator {
+        BusyIndicator
+        {
             id: busyIndicator
             width: parent.width / 8
             height: parent.width / 8
@@ -109,7 +127,8 @@ ColumnLayout {
             anchors.verticalCenter: parent.verticalCenter
             running: !serverButton.enabled && !startWindow.visible
         }
-        ListView {
+        ListView
+        {
             id: gameList
             anchors.bottomMargin: 2
             anchors.topMargin: 2
@@ -118,42 +137,51 @@ ColumnLayout {
             anchors.fill: parent
             visible: !onlineLabel.visible
             clip: true
-            highlight: Rectangle {
+            highlight: Rectangle
+            {
                 color: Universal.accent
                 radius: 2
                 opacity: 0.3
             }
             ScrollIndicator.vertical: ScrollIndicator {}
             snapMode: ListView.SnapToItem
-            delegate: Item {
+            delegate: Item
+            {
                 width: parent.width
                 height: gameList.height / 10
-                Row {
+
+                Row
+                {
                     x: 4
                     anchors.verticalCenter: parent.verticalCenter
                     spacing: 20
-                    Label {
+                    Label
+                    {
                         width: ipColumn.width
                         color: Universal.foreground
                         text: IP
                     }
-                    Label {
+                    Label
+                    {
                         width: portColumn.width
                         color: Universal.foreground
                         text: port
                     }
-                    Rectangle {
+                    Rectangle
+                    {
                         width: sideColumn.width
                         height: parent.height
                         color: colorCode
                     }
-                    Label {
+                    Label
+                    {
                         width: timeColumn.width
                         color: Universal.foreground
                         text: time
                     }
                 }
-                MouseArea {
+                MouseArea
+                {
                     anchors.fill: parent
                     onClicked: gameList.currentIndex = index
                 }
@@ -161,12 +189,15 @@ ColumnLayout {
             model: Client.model
         }    
     }
-    RowLayout {
+    RowLayout
+    {
         Layout.fillHeight: false
         Layout.fillWidth: true
         Layout.preferredHeight: 30
         spacing: 8
-        MyButton {
+
+        MyButton
+        {
             id: acceptButton
             text: qsTr("Accept game")
             Layout.fillHeight: true
@@ -174,7 +205,8 @@ ColumnLayout {
             Layout.preferredWidth: main.width / 4
             enabled: gameList.visible && gameList.currentItem
         }
-        MyButton {
+        MyButton
+        {
             id: createButton
             text: down ? qsTr("Cancel game") : qsTr("Create game")
             Layout.fillHeight: true
@@ -183,7 +215,8 @@ ColumnLayout {
             textColor: down ? "#ee1111" : Universal.foreground
             enabled: false
         }
-        MyButton {
+        MyButton
+        {
             id: closeButton
             text: qsTr("Close")
             Layout.fillWidth: true
@@ -195,73 +228,93 @@ ColumnLayout {
     }
 
     states: [
-        State {
+        State
+        {
             name: "DISCONNECTED"
-            PropertyChanges {
+
+            PropertyChanges
+            {
                 target: serverButton; 
                 enabled: true
                 down: false
             }
-            PropertyChanges {
+            PropertyChanges
+            {
                 target: onlineLabel; 
                 visible: true
                 text: "Disconnected from server"
             }
-            PropertyChanges {
+            PropertyChanges
+            {
                 target: createButton; 
                 enabled: false
                 down: false
             }
         },
-        State {
+        State
+        {
             name: "CONNECTED"
-            PropertyChanges {
+
+            PropertyChanges
+            {
                 target: serverButton; 
                 enabled: true
                 down: true
             }
-            PropertyChanges {
+            PropertyChanges
+            {
                 target: onlineLabel; 
                 visible: !(gameList.count > 0)
                 text: "No games available"
             }
-            PropertyChanges {
+            PropertyChanges
+            {
                 target: createButton; 
                 enabled: true
                 down: false
             }
         },
-        State {
+        State
+        {
             name: "CONNECTING"
-            PropertyChanges {
+
+            PropertyChanges
+            {
                 target: serverButton; 
                 enabled: false
                 down: true
             }
-            PropertyChanges {
+            PropertyChanges
+            {
                 target: onlineLabel; 
                 visible: true
                 text: "Connecting to server..."
             }
-            PropertyChanges {
+            PropertyChanges
+            {
                 target: createButton;
                 enabled: false
                 down: false
             }
         },
-        State {
+        State
+        {
             name: "WAITING"
-            PropertyChanges {
+
+            PropertyChanges
+            {
                 target: serverButton; 
                 enabled: false
                 down: true
             }
-            PropertyChanges {
+            PropertyChanges
+            {
                 target: onlineLabel; 
                 visible: true
                 text: "Waiting for opponent..."
             }
-            PropertyChanges {
+            PropertyChanges
+            {
                 target: createButton; 
                 enabled: true
                 down: true

@@ -1,4 +1,8 @@
+#include <QQuickWindow>
+#include <QSGImageNode>
+
 #include "piece.h"
+#include "engine.h"
 
 Piece::Piece(int y, int x, int t, int c, QQuickItem *parent)
     : QQuickItem(parent), type(t), color(c)

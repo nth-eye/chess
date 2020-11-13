@@ -3,8 +3,8 @@ import QtQuick.Layouts 1.3
 import QtQuick.Controls 2.5
 import QtQuick.Controls.Universal 2.3
 
-Rectangle {
-
+Rectangle
+{
     property alias drawYesButton: drawYesButton
     property alias drawNoButton: drawNoButton
     
@@ -15,19 +15,23 @@ Rectangle {
     anchors.horizontalCenter: parent.horizontalCenter
     anchors.verticalCenter: parent.verticalCenter
     
-    Label {
+    Label
+    {
        text: "Opponent offers you a draw"
        font.pointSize: 12
        anchors.horizontalCenter: parent.horizontalCenter
        topPadding: main.height/2 - 28
     }
     
-    RowLayout {
+    RowLayout
+    {
         spacing: 1
         anchors.right: parent.right
         anchors.left: parent.left
         anchors.bottom: parent.bottom
-        MyButton {
+
+        MyButton
+        {
             id: drawYesButton
             width: 90
             text: qsTr("Accept")
@@ -36,7 +40,8 @@ Rectangle {
             Layout.fillHeight: true
             Layout.fillWidth: true
         }
-        MyButton {
+        MyButton
+        {
             id: drawNoButton
             width: 90
             text: qsTr("Deny")

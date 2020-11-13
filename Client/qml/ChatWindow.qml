@@ -3,7 +3,8 @@ import QtQuick.Controls 2.5
 import QtQuick.Controls.Universal 2.3
 import QtQuick.Layouts 1.3
 
-ColumnLayout {
+ColumnLayout
+{
     property alias finishButton: finishButton
     
     property alias stopButtons: stopButtons
@@ -26,7 +27,9 @@ ColumnLayout {
     anchors.rightMargin: 39
     anchors.topMargin: 9
     spacing: 12
-    MyButton {
+
+    MyButton
+    {
         id: finishButton
         text: qsTr("Finish")
         textColor: "#ee1111"
@@ -35,49 +38,61 @@ ColumnLayout {
         enabled: true
         visible: false
     }
-    RowLayout {
+    RowLayout
+    {
         id: stopButtons
         Layout.fillWidth: true
         visible: !finishButton.visible
         spacing: 12
-        Button {
+
+        Button
+        {
             id: claimDrawButton
             text: qsTr("Claim draw")
             Layout.fillWidth: true
             enabled: false;
         }
-        Button {
+        Button
+        {
             id: offerDrawButton
             text: qsTr("Offer draw")
             Layout.fillWidth: true
             enabled: false;
         }
-        Button {
+        Button
+        {
             id: resignButton
             text: qsTr("Resign")
             Layout.fillWidth: true
         }
-        Timer {
+        Timer
+        {
             id: drawTimer
             interval: 30000
             repeat: false
         }
     }
-    ColumnLayout {
+    ColumnLayout
+    {
         Layout.fillWidth: true
         spacing: -2
-        RowLayout {
+
+        RowLayout
+        {
             Layout.fillWidth: true
             Layout.fillHeight: false
             spacing: 0
-            TextField {
+
+            TextField
+            {
                 id: ipField
                 Layout.fillHeight: true
                 Layout.fillWidth: true
                 placeholderText: "IP address..."
                 enabled: false
             }
-            MyButton {
+            MyButton
+            {
                 id: disconnectButton
                 text: "Disconnect"
                 textColor: "#ee1111"
@@ -86,24 +101,30 @@ ColumnLayout {
                 Layout.minimumWidth: 100
                 Layout.preferredWidth: 100
                 enabled: false
-                Rectangle {
+
+                Rectangle
+                {
                     color: "#888888"
                     height: parent.height
                     width: 2
                 }
             }
         }
-        Rectangle {
+        Rectangle
+        {
             color: "#888888"
             Layout.fillWidth: true
             height: 2
             z: 1
         }
-        Flickable {
+        Flickable
+        {
             Layout.fillWidth: true
             Layout.fillHeight: true
             clip: true
-            TextArea.flickable: TextArea {
+
+            TextArea.flickable: TextArea
+            {
                 id: dialogueText
                 color: Universal.accent
                 readOnly: true
@@ -114,21 +135,25 @@ ColumnLayout {
                 wrapMode: TextEdit.Wrap 
                 Layout.fillWidth: true
                 Layout.fillHeight: true
-                background: Rectangle {
+                background: Rectangle
+                {
                     color: settingsPage.themeSwitch.checked ? "#cccccc" : "#333333"
                 }
             }
-            ScrollBar.vertical: ScrollBar {
+            ScrollBar.vertical: ScrollBar
+            {
                 width: 2
             }
         }
     }
-    RowLayout {
+    RowLayout
+    {
         spacing: 6
         Layout.fillWidth: true
         Layout.fillHeight: false
         Layout.preferredHeight: 32
-        TextField {
+        TextField
+        {
             id: messageField
             placeholderText: qsTr("Message...")
             Layout.fillWidth: true
@@ -136,7 +161,8 @@ ColumnLayout {
             selectByMouse: true
             enabled: disconnectButton.enabled
         }
-        Button {
+        Button
+        {
             id: sendButton
             text: qsTr("Send")
             Layout.maximumWidth: 60

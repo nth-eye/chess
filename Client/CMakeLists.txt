@@ -12,19 +12,15 @@ set(CMAKE_CXX_STANDARD 20)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
 
 set(ENGINE_DIR ~/github/ChessEngine-cpp/)
+file(GLOB SRC_FILES src/*.cpp)
+file(GLOB HEAD_FILES include/*.h)
 
 include_directories(. qml include ${ENGINE_DIR}/include)
 
 set(SOURCES
-    src/main.cpp
-    src/client.cpp
-    src/game.cpp
-    src/model.cpp
-    src/piece.cpp
-    src/player.cpp
-    src/spot.cpp
-    #ENGINE_DIR/src/engine.cpp
-    #ENGINE_DIR/src/board.cpp
+    ${SRC_FILES}
+    ${ENGINE_DIR}/src/engine.cpp
+    ${ENGINE_DIR}/src/board.cpp
 )
 
 # QtCreator supports the following variables for Android, which are identical to qmake Android variables.
@@ -45,28 +41,17 @@ find_package(Qt5 COMPONENTS Core Quick Widgets Network Concurrent REQUIRED)
 
 if(ANDROID)
     add_library(Chess SHARED
-        src/main.cpp
-        src/client.cpp
-        src/game.cpp
-        src/model.cpp
-        src/piece.cpp
-        src/player.cpp
-        src/spot.cpp
-        # ENGINE_DIR/src/engine.cpp
-        # ENGINE_DIR/src/board.cpp
+        ${SRC_FILES}
+        ${ENGINE_DIR}/src/engine.cpp
+        ${ENGINE_DIR}/src/board.cpp
         qml.qrc
     )
 else()
     add_executable(Chess
-        src/main.cpp
-        src/client.cpp
-        src/game.cpp
-        src/model.cpp
-        src/piece.cpp
-        src/player.cpp
-        src/spot.cpp
-        # ENGINE_DIR/src/engine.cpp
-        # ENGINE_DIR/src/board.cpp
+        ${SRC_FILES}
+        ${ENGINE_DIR}/src/engine.cpp
+        ${ENGINE_DIR}/src/board.cpp
+        ${HEAD_FILES}
         qml.qrc
     )
 endif()

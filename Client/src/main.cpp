@@ -12,8 +12,8 @@ int main(int argc, char *argv[])
 
     QScopedPointer<Client> client(new Client);
     QScopedPointer<Game> game(new Game(client.get()));
-    // FIXME qmlRegisterSingletonInstance("chess.client", 1, 0, "Client", client.get());
-    // FIXME qmlRegisterSingletonInstance("chess.game", 1, 0, "Game", game.get());
+    qmlRegisterSingletonInstance("chess.client", 1, 0, "Client", client.get());
+    qmlRegisterSingletonInstance("chess.game", 1, 0, "Game", game.get());
 
     const QUrl url(QStringLiteral("qrc:/qml/main.qml"));
     QObject::connect(&engine, &QQmlApplicationEngine::objectCreated,

@@ -1,15 +1,17 @@
 import QtQuick 2.0
 import QtQuick.Controls.Universal 2.3
 
-Rectangle {
-
+Rectangle
+{
     property alias clockTime: clockTime
     
     id: clock
     width: 110
     height: 40
     radius: 3
-    Text {
+
+    Text
+    {
         id: clockTime
         text: "00:00:0"
         font.pointSize: 14
@@ -17,24 +19,32 @@ Rectangle {
         anchors.horizontalCenter: parent.horizontalCenter
     }
     states: [
-        State {
+        State
+        {
             name: "RUNNING"
-            PropertyChanges {
+
+            PropertyChanges
+            {
                 target: clock
                 color: Universal.theme === Universal.Dark ? "#ffffff" : "#000000"
             }
-            PropertyChanges {
+            PropertyChanges
+            {
                 target: clockTime
                 color: Universal.theme === Universal.Dark ? "#000000" : "#ffffff"
             }
         },
-        State {
+        State
+        {
             name: "STOPPED"
-            PropertyChanges {
+
+            PropertyChanges
+            {
                 target: clock
                 color: Universal.theme === Universal.Dark ? "#000000" : "#ffffff"
             }
-            PropertyChanges {
+            PropertyChanges
+            {
                 target: clockTime
                 color: Universal.theme === Universal.Dark ? "#ffffff" : "#000000"
             }

@@ -2,11 +2,6 @@
 #define PIECE_H
 
 #include <QQuickItem>
-#include <QQuickWindow>
-#include <QSGImageNode>
-#include <QImage>
-
-#include "engine.h"
 
 const int SQ_SIZE = 60;
 
